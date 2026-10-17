@@ -143,7 +143,7 @@ export const achievements = {
     eventName: "UTM Royal Intellectual Forum 2026",
     year: "2026",
     role: "Ahli Panel Jemputan",
-    body: "Saya dipilih dan dijemput sebagai ahli panel di Forum Intelektual Diraja UTM 2026 — satu forum yang berlangsung dengan keberangkatan Raja Permaisuri Agong, Raja Zarith Sofiah, serta YAM Che Puan Mahkota Khaleeda.",
+    body: "Saya dipilih dan dijemput sebagai ahli panel di Forum Intelektual Diraja UTM 2026 — satu forum yang berlangsung dengan keberangkatan Raja Permaisuri Agong, Raja Zarith Sofiah, serta YAM Che Puan Mahkota Khaleeda Johor.",
     reflection: "Peluang untuk membawa suara kesihatan mental ke pentas intelektual — satu penghormatan yang sangat bermakna buat saya.",
     /** Add the official event photo here when available (see PHOTO-UPLOADS.md) */
     image: undefined as Photo | undefined,
@@ -178,22 +178,6 @@ export const mediaAppearances: MediaAppearance[] = [
   { id: "rtmcuit", type: "tv", outlet: "RTM", program: "Cuit Sikit Jangan Sentap" },
   { id: "kool101", type: "radio", outlet: "Kool 101", program: "Radio" },
   { id: "erasarawak", type: "radio", outlet: "ERA Sarawak", program: "Radio" },
-  {
-    id: "krayon-healing-fighter",
-    type: "podcast",
-    outlet: "Krayon4Society",
-    program: "Podcast Malam Inspirasi Healing Fighter",
-    note: "Fokus: Kesihatan Mental di Tempat Kerja, bersama majikan, CEO, HR dan pihak berkepentingan.",
-    url: "https://www.tiktok.com/@drazrennotes/video/7428379204955278610",
-    urlLabel: "Tonton di TikTok",
-    thumbnail: {
-      src: "tiktok-7428379204955278610",
-      alt: "Dr Azren sebagai tetamu di set Podcast Malam Inspirasi Healing Fighter",
-      width: 817,
-      height: 1453,
-      position: "50% 35%",
-    },
-  },
   { id: "caprice", type: "podcast", outlet: "Caprice Podcast Show" },
   { id: "siraplimau", type: "podcast", outlet: "Sirap Limau Podcast" },
   { id: "dekatmic", type: "podcast", outlet: "DekatMic Podcast", program: "bersama Financial Faiz" },
@@ -328,8 +312,15 @@ export const consultation = {
   subheading: "Konsultasi, Saringan & Rawatan Kesihatan Mental.",
   body: "Setiap orang melalui cabaran emosi yang berbeza. Jika gejala mula mengganggu kehidupan harian, mendapatkan penilaian profesional boleh menjadi salah satu langkah untuk memahami keadaan diri dan pilihan bantuan yang sesuai.",
   clinic: "Klinik Nissa",
-  /** Fill in the clinic address/area once confirmed — it will appear in the section and in search data. */
-  location: "",
+  /** Clinic address — shown in the section and used in search data. */
+  location: "Klinik Nissa, 9697, Ground Floor, Jalan BBN 1/3C, Pusat Bandar Putra Point, 71800 Nilai, Negeri Sembilan",
+  address: {
+    streetAddress: "9697, Ground Floor, Jalan BBN 1/3C, Pusat Bandar Putra Point",
+    postalCode: "71800",
+    addressLocality: "Nilai",
+    addressRegion: "Negeri Sembilan",
+    addressCountry: "MY",
+  },
   services: [
     "Konsultasi Kesihatan Mental",
     "Saringan Kesihatan Mental",
@@ -344,15 +335,6 @@ export const consultation = {
   ],
   note: "Setiap individu berbeza. Konsultasi membantu memahami keadaan anda dan pilihan bantuan — tiada janji hasil tertentu. Sila jangan kongsi maklumat kesihatan sensitif melalui media sosial atau WhatsApp.",
   cta: "Tempah Konsultasi Bersama Dr Azren",
-  crisis: {
-    heading: "Perlukan bantuan segera?",
-    body: "Jika anda atau seseorang berada dalam bahaya atau terfikir untuk mencederakan diri, hubungi talian kecemasan atau pergi ke Jabatan Kecemasan hospital terdekat.",
-    lines: [
-      { label: "Kecemasan", value: "999", href: "tel:999" },
-      { label: "Talian HEAL (KKM)", value: "15555", href: "tel:15555" },
-      { label: "Befrienders KL", value: "03-7627 2929", href: "tel:+60376272929" },
-    ],
-  },
 };
 
 /* ------------------------------------------------------ collaboration --- */
@@ -504,17 +486,6 @@ export const galleryCategories: { id: GalleryCategory | "semua"; label: string }
  */
 export const programEvents: ProgramEvent[] = [
   {
-    id: "krayon-healing-fighter",
-    title: "Podcast Malam Inspirasi Healing Fighter",
-    organizer: "NGO Krayon4Society",
-    categories: ["media", "forum", "korporat"],
-    caption: "Sembang tentang Kesihatan Mental di Tempat Kerja bersama majikan, CEO, HR dan pihak berkepentingan dari pelbagai syarikat.",
-    image: mediaAppearances.find((m) => m.id === "krayon-healing-fighter")!.thumbnail,
-    sourceUrl: "https://www.tiktok.com/@drazrennotes/video/7428379204955278610",
-    sourceLabel: "Lihat di TikTok",
-    featured: true,
-  },
-  {
     id: "buku-naskhah",
     title: "Dr, Saya Boleh Sembuh Ke?",
     organizer: "Whitecoat",
@@ -649,8 +620,9 @@ export const seo = {
     "Ceramah Kesihatan Mental",
     "Mental Health Speaker Malaysia",
     "Booth Saringan Kesihatan Mental",
-    "Konsultasi Kesihatan Mental",
-    "Klinik Nissa",
+    "Konsultasi Kesihatan Mental Nilai",
+    "Doktor Kesihatan Mental Nilai",
+    "Klinik Nissa Nilai",
     "Spread Positivity",
   ],
   /**

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { links, navItems, profile, socials } from "@/content/site";
+import { consultation, links, navItems, profile, socials } from "@/content/site";
 import { useMotionPrefs } from "./providers/MotionPrefs";
 import { CtaButton } from "./ui/CtaButton";
 import { Marquee } from "./ui/Marquee";
@@ -61,6 +61,7 @@ export function Footer() {
             <p className="font-display text-2xl font-extrabold">{profile.displayName}</p>
             <p className="mt-2 max-w-sm text-sm leading-relaxed text-ivory/60">{profile.descriptor}</p>
             <p className="mt-4 text-sm text-ivory/60">Pendaftaran Penuh MMC No. 90486</p>
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-ivory/60">{consultation.location}</p>
           </div>
           <nav aria-label="Pautan footer">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-ivory/40">Teroka</p>
@@ -96,8 +97,7 @@ export function Footer() {
         </div>
 
         <p className="mt-12 max-w-3xl text-xs leading-relaxed text-ivory/45">
-          Kandungan laman web ini adalah untuk tujuan pendidikan dan kesedaran umum, dan bukan pengganti nasihat, diagnosis atau rawatan perubatan profesional. Dalam
-          kecemasan, hubungi 999 atau pergi ke Jabatan Kecemasan hospital terdekat.
+          Kandungan laman web ini adalah untuk tujuan pendidikan dan kesedaran umum, dan bukan pengganti nasihat, diagnosis atau rawatan perubatan profesional.
         </p>
       </div>
 

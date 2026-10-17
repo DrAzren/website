@@ -140,7 +140,7 @@ Video TikTok dalam hab sosial: `tiktokVideos`. Untuk menukar, tambah ID video, U
 
 ## 7. Lokasi klinik
 
-`consultation.location` kini kosong kerana alamat Klinik Nissa tiada dalam CV. Isi (contoh: `"Klinik Nissa, Nilai, Negeri Sembilan"`) dan ia akan muncul dalam bahagian Konsultasi.
+Alamat Klinik Nissa disimpan dalam `consultation.location` (teks penuh, juga dipaparkan di footer) dan `consultation.address` (pecahan alamat untuk kad lokasi, pautan Google Maps dan data carian/JSON-LD). Kemas kini kedua-duanya jika alamat berubah.
 
 ---
 

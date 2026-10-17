@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { links, programEvents, speaking } from "@/content/site";
+import { links, profile, programEvents, speaking } from "@/content/site";
 import { CtaButton } from "../ui/CtaButton";
 import { Check, Whatsapp } from "../ui/Icons";
 import { Picture } from "../ui/Picture";
@@ -76,7 +76,9 @@ export function Speaking() {
               ))}
             </div>
           ) : (
-            <div className="grid aspect-[4/5] place-items-center rounded-[2rem] bg-ivory/30 font-display text-2xl font-bold">Jom kita bincang!</div>
+            <div className="aspect-[4/5] overflow-hidden rounded-[2rem] border-[6px] border-ivory bg-[#f1efe9] shadow-lift">
+              <Picture photo={profile.portraitFormal} sizes="(min-width:1024px) 28rem, 85vw" />
+            </div>
           )}
           <Sparkle className="absolute -bottom-6 -right-4 h-14 w-14 animate-spinslow text-ivory" />
         </div>

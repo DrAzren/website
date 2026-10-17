@@ -16,7 +16,6 @@ Instagram (@fakrulazren) **menyekat akses automatik** (HTTP 429), dan Beacons (b
 | Potret rasmi berkot | Dimuat naik oleh Dr Azren | Kenali Saya, garis masa |
 | Kulit buku | Dimuat naik oleh Dr Azren | Pencapaian, buku 3D, garis masa |
 | Susunan naskhah buku | Dimuat naik oleh Dr Azren | Galeri (Buku & PBAKL), bahagian buku |
-| Podcast Malam Inspirasi Healing Fighter (Krayon4Society) | Thumbnail rasmi TikTok @drazrennotes (oEmbed) | Galeri (Sorotan), dinding media, Jemputan Ceramah |
 | 3 thumbnail video edukasi | Thumbnail rasmi TikTok @drazrennotes (oEmbed) | Hab media sosial |
 
 ---

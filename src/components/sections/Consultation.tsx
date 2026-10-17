@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { consultation, links } from "@/content/site";
 import { CtaButton } from "../ui/CtaButton";
-import { Calendar, Check, Phone, Stethoscope } from "../ui/Icons";
+import { ArrowUpRight, Calendar, Check, MapPin, Stethoscope } from "../ui/Icons";
 import { Reveal } from "../ui/Reveal";
 import { SplitWords } from "../ui/SplitWords";
 import { Sparkle } from "../ui/Stickers";
@@ -17,7 +17,7 @@ export function Consultation() {
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <div>
             <Reveal>
-              <p className="eyebrow text-coral-600">Konsultasi · {c.clinic}</p>
+              <p className="eyebrow text-coral-600">Konsultasi · {c.clinic}, {c.address.addressLocality}</p>
             </Reveal>
             <SplitWords id="konsultasi-tajuk" text={c.heading} className="mt-5 text-giant font-extrabold" />
             <Reveal delay={0.1}>
@@ -42,7 +42,7 @@ export function Consultation() {
                 </li>
               ))}
             </ul>
-            {c.location && <p className="mt-5 border-t border-navy/10 pt-4 text-sm text-ink/70">📍 {c.location}</p>}
+            
           </Reveal>
         </div>
 
@@ -81,22 +81,24 @@ export function Consultation() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <aside aria-labelledby="krisis-tajuk" className="relative overflow-hidden rounded-[1.75rem] bg-navy p-6 text-ivory sm:p-7">
+            <aside aria-labelledby="lokasi-tajuk" className="relative overflow-hidden rounded-[1.75rem] bg-navy p-6 text-ivory sm:p-7">
               <Sparkle className="absolute -right-4 -top-4 h-16 w-16 text-coral/30" />
-              <h3 id="krisis-tajuk" className="flex items-center gap-2 text-xl font-extrabold">
-                <Phone width={20} height={20} className="text-coral" /> {c.crisis.heading}
+              <h3 id="lokasi-tajuk" className="flex items-center gap-2 text-xl font-extrabold">
+                <MapPin width={20} height={20} className="text-coral" /> Lokasi {c.clinic}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-ivory/75">{c.crisis.body}</p>
-              <ul className="mt-4 grid gap-2 sm:grid-cols-3">
-                {c.crisis.lines.map((l) => (
-                  <li key={l.label}>
-                    <a href={l.href} className="block rounded-2xl bg-ivory/10 px-4 py-3 transition hover:bg-coral hover:text-navy">
-                      <span className="block text-xs font-semibold opacity-75">{l.label}</span>
-                      <span className="font-display text-lg font-extrabold">{l.value}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <address className="mt-3 not-italic leading-relaxed text-ivory/80">
+                {c.address.streetAddress},
+                <br />
+                {c.address.postalCode} {c.address.addressLocality}, {c.address.addressRegion}
+              </address>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.location)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-ivory/10 px-4 py-2.5 font-display text-sm font-bold transition hover:bg-coral hover:text-navy"
+              >
+                Buka di Google Maps <ArrowUpRight width={16} height={16} />
+              </a>
             </aside>
           </Reveal>
         </div>

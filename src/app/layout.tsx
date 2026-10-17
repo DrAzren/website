@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Plus_Jakarta_Sans } from "next/font/google";
 import { MotionPrefsProvider } from "@/components/providers/MotionPrefs";
-import { book, links, profile, seo, socials } from "@/content/site";
+import { book, consultation, links, profile, seo, socials } from "@/content/site";
 import "./globals.css";
 
 const display = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["500", "600", "700", "800"], variable: "--font-display", display: "swap" });
@@ -44,7 +44,7 @@ const jsonLd = {
       image: `${seo.siteUrl}/images/${profile.portrait.src}.jpg`,
       url: seo.siteUrl,
       sameAs: socials.map((s) => s.url),
-      worksFor: { "@type": "MedicalClinic", name: "Klinik Nissa" },
+      worksFor: { "@type": "MedicalClinic", name: "Klinik Nissa", address: { "@type": "PostalAddress", ...consultation.address } },
       alumniOf: [
         { "@type": "CollegeOrUniversity", name: "Universiti Sains Malaysia" },
         { "@type": "CollegeOrUniversity", name: "Universiti Malaya" },

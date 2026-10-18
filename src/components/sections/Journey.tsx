@@ -25,7 +25,7 @@ export function Journey() {
           <SplitWords id="perjalanan-tajuk" text="Kenali Perjalanan Saya." className="mt-5 text-giant font-extrabold text-navy" />
           <Reveal delay={0.15}>
             <p className="mt-6 text-lg leading-relaxed text-ink/75">
-              Bukan sekadar CV — ini perjalanan dari bilik kuliah ke wad hospital, ke klinik, ke pentas dan ke halaman buku. Jom skrol bersama.
+              Ini perjalanan saya: dari bilik kuliah ke wad hospital, ke klinik, ke pentas dan ke halaman buku. Jom skrol bersama.
             </p>
           </Reveal>
         </div>

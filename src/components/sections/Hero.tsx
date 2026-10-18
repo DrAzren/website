@@ -84,7 +84,7 @@ export function Hero() {
             <motion.p {...appear(0.8)} className="mt-6 flex max-w-xl items-start gap-3 font-display text-lg font-bold text-navy sm:text-xl">
               <Sparkle className="mt-1 h-5 w-5 shrink-0 animate-spinslow text-coral" />
               <span>
-                Bukan Sekadar Ilmu. <span className="bg-gradient-to-r from-lavender to-sky bg-[length:100%_40%] bg-bottom bg-no-repeat">Tetapi Tentang Memahami Manusia.</span>
+                Ilmu Tentang <span className="bg-gradient-to-r from-lavender to-sky bg-[length:100%_40%] bg-bottom bg-no-repeat">Memahami Manusia.</span>
               </span>
             </motion.p>
 

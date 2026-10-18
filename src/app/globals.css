@@ -158,8 +158,9 @@ html.reduce-motion .intro {
 /* ---------- 3D book ---------- */
 .book3d {
   --w: clamp(190px, 52vw, 300px);
-  --h: calc(var(--w) * 1.4);
-  --t: calc(var(--w) * 0.11);
+  /* proportions of the printed book: 125 x 177.5 x 13.4 mm */
+  --h: calc(var(--w) * 1.42);
+  --t: calc(var(--w) * 0.107);
   width: var(--w);
   height: var(--h);
 }

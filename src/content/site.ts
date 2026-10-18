@@ -11,6 +11,8 @@
  * ============================================================================
  */
 
+import { engagements } from "./engagements";
+
 /* ---------------------------------------------------------------- types -- */
 
 /**
@@ -89,7 +91,7 @@ export const profile = {
     /** Words in the heading that receive the coral highlight */
     highlight: ["Kesihatan", "Mental."],
     body: "Hai, saya Dr Fakrul Azren. Seorang doktor, penulis dan penceramah yang percaya kesihatan mental perlu dibincangkan dengan lebih terbuka, santai dan tanpa stigma.",
-    secondary: "Bukan Sekadar Ilmu. Tetapi Tentang Memahami Manusia.",
+    secondary: "Ilmu Tentang Memahami Manusia.",
     floatingWords: ["MENTAL HEALTH", "SPREAD POSITIVITY", "LET'S TALK", "YOU MATTER", "JOM SEMBANG"],
     bubbles: [
       "Hai! Jom sembang 👋",
@@ -152,7 +154,7 @@ export const achievements = {
   bestseller: {
     kicker: "Pencapaian 02 · Penulisan",
     title: "No. 1 Top Bestseller — PBAKL 2026",
-    body: "Buku sulung saya, “Dr, Saya Boleh Sembuh Ke?” terbitan Whitecoat, tersenarai sebagai No. 1 Top Bestseller di Pesta Buku Antarabangsa Kuala Lumpur (PBAKL) 2026. Terima kasih kepada setiap pembaca yang sudi membuka ruang untuk berbincang tentang kesihatan mental.",
+    body: "Buku sulung saya, “Dr, Saya Boleh Sembuh Ke?” terbitan Whitecoat Books, berada di tempat No. 1 dalam senarai Top 10 Bestseller Whitecoat Books di Pesta Buku Antarabangsa Kuala Lumpur (PBAKL) 2026. Terima kasih kepada setiap pembaca yang sudi membuka ruang untuk berbincang tentang kesihatan mental.",
   },
   media: {
     kicker: "Pencapaian 03 · Media",
@@ -178,6 +180,8 @@ export const mediaAppearances: MediaAppearance[] = [
   { id: "rtmcuit", type: "tv", outlet: "RTM", program: "Cuit Sikit Jangan Sentap" },
   { id: "kool101", type: "radio", outlet: "Kool 101", program: "Radio" },
   { id: "erasarawak", type: "radio", outlet: "ERA Sarawak", program: "Radio" },
+  { id: "erafm", type: "radio", outlet: "ERA FM", program: "Radio" },
+  { id: "rakitafm", type: "radio", outlet: "Rakita FM", program: "Buka Cerita" },
   { id: "caprice", type: "podcast", outlet: "Caprice Podcast Show" },
   { id: "siraplimau", type: "podcast", outlet: "Sirap Limau Podcast" },
   { id: "dekatmic", type: "podcast", outlet: "DekatMic Podcast", program: "bersama Financial Faiz" },
@@ -186,7 +190,11 @@ export const mediaAppearances: MediaAppearance[] = [
   { id: "kitabincang", type: "podcast", outlet: "Kita Bincang Podcast" },
   { id: "borakopi", type: "podcast", outlet: "Borakopi Podcast" },
   { id: "hiviral", type: "podcast", outlet: "Hi Viral Podcast" },
+  { id: "sociowara", type: "podcast", outlet: "Podcast Sociowara", program: "UiTM Shah Alam" },
+  { id: "verbatim", type: "podcast", outlet: "Podcast Verbatim", program: "UPSI" },
+  { id: "ruangjiwa", type: "podcast", outlet: "Podcast Ruang Jiwa", program: "UKM" },
   { id: "hmetro", type: "akhbar", outlet: "Harian Metro", program: "Artikel & pandangan pakar", note: "Sumbangan artikel dan pandangan tentang isu kesihatan mental." },
+  { id: "bernama", type: "akhbar", outlet: "Bernama", program: "Artikel", note: "Sumbangan artikel tentang kesihatan mental." },
 ];
 
 export const mediaTypeLabels: Record<MediaType, string> = {
@@ -223,12 +231,15 @@ export const institutions = {
   ],
 };
 
-/** Counts derived from the named items in the CV ("+" because the CV says "etc."). */
+/** Headline numbers, counted from the invitation record (src/content/engagements.ts). */
+const countBy = (f: (e: (typeof engagements)[number]) => boolean) => engagements.filter(f).length;
+const years = engagements.map((e) => e.year);
+export const engagementSpan = `${Math.min(...years)}-${Math.max(...years)}`;
 export const stats = [
-  { value: 10, suffix: "+", label: "Institusi pendidikan" },
-  { value: 7, suffix: "+", label: "Organisasi & agensi" },
-  { value: 9, suffix: "+", label: "Saluran TV & radio" },
-  { value: 8, suffix: "+", label: "Podcast" },
+  { value: engagements.length, suffix: "", label: `Jemputan program (${engagementSpan})` },
+  { value: countBy((e) => e.role === "Penceramah"), suffix: "", label: "Sesi ceramah" },
+  { value: countBy((e) => e.category === "media"), suffix: "", label: "TV, radio, podcast & akhbar" },
+  { value: countBy((e) => e.category === "pendidikan"), suffix: "", label: "Universiti, kolej & sekolah" },
 ];
 
 export const speaking = {
@@ -252,7 +263,7 @@ export const speaking = {
     { title: "Resilience", blurb: "Membina daya tahan untuk hadapi cabaran hidup." },
     { title: "Kesihatan Mental Remaja", blurb: "Untuk pelajar, ibu bapa dan pendidik." },
     { title: "Mental Health at Workplace", blurb: "Tempat kerja yang sihat bermula dengan perbualan." },
-    { title: "Self-Care dan Kesejahteraan Mental", blurb: "Penjagaan diri yang realistik, bukan sekadar trend." },
+    { title: "Self-Care dan Kesejahteraan Mental", blurb: "Penjagaan diri yang realistik dan mampan." },
     { title: "Hubungan dan Komunikasi Sihat", blurb: "Berkomunikasi dengan empati, dalam keluarga dan kerjaya." },
   ],
   cta: "Jemput Dr Azren Berceramah",
@@ -267,17 +278,52 @@ export const book = {
   author: "Dr Azren",
   publisher: "Whitecoat",
   year: "2026",
-  achievement: "No. 1 Top Bestseller — PBAKL 2026",
+  achievement: "No. 1 Top Bestseller · PBAKL 2026",
+  achievementNote: "Tempat pertama dalam senarai Top 10 Bestseller Whitecoat Books di PBAKL 2026.",
   description:
     "Ada persoalan yang sukar diluahkan. Ada perasaan yang dipendam terlalu lama. Melalui buku ini, saya mengajak pembaca mengenali kesihatan mental dengan lebih dekat, memahami perjuangan emosi dan membuka ruang kepada harapan.",
   themes: ["Memahami Emosi", "Melawan Stigma", "Mencari Harapan", "Kenali Diri"],
   /** Topics printed on the genuine front cover */
   coverTopics: ["OCD", "Depression", "Addiction", "Anxiety", "ADHD", "Bipolar", "Schizophrenia", "PTSD", "Personality Disorder"],
+  /** Front, spine and back are cut from the genuine print file (DSBSK_WC_Print_FA_001.pdf). */
   cover: {
     src: "book-cover",
-    alt: "Kulit hadapan buku Dr, Saya Boleh Sembuh Ke? — Manual Survival Kesihatan Mental oleh Dr Azren",
-    width: 914,
-    height: 1280,
+    alt: "Kulit hadapan buku Dr, Saya Boleh Sembuh Ke? Manual Survival Kesihatan Mental oleh Dr Azren",
+    width: 1471,
+    height: 2091,
+  } satisfies Photo,
+  spine: { src: "book-spine", alt: "Tulang buku Dr, Saya Boleh Sembuh Ke?", width: 155, height: 2091 } satisfies Photo,
+  back: {
+    src: "book-back",
+    alt: "Kulit belakang buku Dr, Saya Boleh Sembuh Ke? dengan sinopsis dan ISBN 978-967-2705-70-3",
+    width: 1472,
+    height: 2091,
+  } satisfies Photo,
+  /** 3D renders made from the print file (scripts/render_book.py), transparent background */
+  render: {
+    src: "book-3d",
+    alt: "Ilustrasi 3D buku Dr, Saya Boleh Sembuh Ke? menunjukkan kulit hadapan dan tulang buku",
+    width: 1600,
+    height: 1985,
+  } satisfies Photo,
+  renderBack: {
+    src: "book-3d-back",
+    alt: "Ilustrasi 3D kulit belakang buku Dr, Saya Boleh Sembuh Ke?",
+    width: 1600,
+    height: 1980,
+  } satisfies Photo,
+  shelfPhoto: {
+    src: "book-shelf",
+    alt: "Naskhah buku Dr, Saya Boleh Sembuh Ke? tersusun di rak paparan",
+    width: 941,
+    height: 1672,
+  } satisfies Photo,
+  /** Official Whitecoat Books graphic: Top 10 Bestseller PBAKL */
+  pbaklList: {
+    src: "pbakl-top10",
+    alt: "Senarai Top 10 Bestseller PBAKL oleh Whitecoat Books, dengan Dr, Saya Boleh Sembuh Ke? di tempat pertama",
+    width: 1599,
+    height: 2000,
   } satisfies Photo,
   photo: {
     src: "book-stack",
@@ -505,11 +551,23 @@ export const programEvents: ProgramEvent[] = [
   },
   {
     id: "pbakl-2026",
-    title: "PBAKL 2026",
-    organizer: "Pesta Buku Antarabangsa Kuala Lumpur",
+    title: "Top 10 Bestseller PBAKL",
+    organizer: "Whitecoat Books",
     year: "2026",
     categories: ["buku"],
-    caption: "“Dr, Saya Boleh Sembuh Ke?” — No. 1 Top Bestseller di PBAKL 2026 (Whitecoat).",
+    caption: "Senarai rasmi Top 10 Bestseller Whitecoat Books di PBAKL 2026, dengan “Dr, Saya Boleh Sembuh Ke?” di tempat pertama.",
+    image: book.pbaklList,
+    featured: true,
+  },
+  {
+    id: "buku-rak",
+    title: "Dr, Saya Boleh Sembuh Ke?",
+    organizer: "Whitecoat Books",
+    year: "2026",
+    categories: ["buku"],
+    caption: "Naskhah fizikal “Dr, Saya Boleh Sembuh Ke?” di rak paparan.",
+    image: book.shelfPhoto,
+    featured: true,
   },
   {
     id: "saringan-tempat-kerja",
@@ -523,6 +581,7 @@ export const programEvents: ProgramEvent[] = [
     id: "usim",
     title: "Program Kesihatan Mental",
     organizer: "Universiti Sains Islam Malaysia (USIM), Nilai",
+    year: "2025",
     categories: ["pendidikan", "forum"],
     caption: "Perkongsian kesihatan mental bersama warga universiti.",
   },
@@ -530,6 +589,7 @@ export const programEvents: ProgramEvent[] = [
     id: "majlis-perbandaran-pengerang",
     title: "Program Kesihatan Mental",
     organizer: "Majlis Perbandaran Pengerang",
+    year: "2025",
     categories: ["korporat"],
     caption: "Program kesihatan mental bersama warga organisasi.",
   },
@@ -544,6 +604,7 @@ export const programEvents: ProgramEvent[] = [
     id: "tenaga-switchgear",
     title: "Program Kesihatan Mental",
     organizer: "Tenaga Switchgear",
+    year: "2025",
     categories: ["korporat"],
     caption: "Program kesihatan mental bersama warga organisasi.",
   },
@@ -558,6 +619,7 @@ export const programEvents: ProgramEvent[] = [
     id: "kwsp-muar",
     title: "Program Kesihatan Mental",
     organizer: "KWSP Muar",
+    year: "2024",
     categories: ["korporat"],
     caption: "Program kesihatan mental bersama warga organisasi.",
   },
@@ -565,6 +627,7 @@ export const programEvents: ProgramEvent[] = [
     id: "upsi",
     title: "Program Kesihatan Mental",
     organizer: "Universiti Pendidikan Sultan Idris (UPSI)",
+    year: "2024",
     categories: ["pendidikan", "forum"],
     caption: "Perkongsian kesihatan mental bersama warga universiti.",
   },
@@ -572,6 +635,7 @@ export const programEvents: ProgramEvent[] = [
     id: "ipptar",
     title: "Program Kesihatan Mental",
     organizer: "IPPTAR",
+    year: "2024",
     categories: ["korporat"],
     caption: "Program kesihatan mental bersama warga institusi.",
   },
@@ -579,6 +643,7 @@ export const programEvents: ProgramEvent[] = [
     id: "parker-hannifin",
     title: "Program Kesihatan Mental",
     organizer: "Parker Hannifin Aerospace",
+    year: "2024",
     categories: ["korporat"],
     caption: "Program kesihatan mental bersama warga organisasi.",
   },
@@ -586,6 +651,7 @@ export const programEvents: ProgramEvent[] = [
     id: "uum",
     title: "Program Kesihatan Mental",
     organizer: "Universiti Utara Malaysia (UUM)",
+    year: "2024",
     categories: ["pendidikan", "forum"],
     caption: "Perkongsian kesihatan mental bersama warga universiti.",
   },

@@ -28,13 +28,20 @@ WIDTHS = (480, 960, 1600)
 
 
 def optimise(path: Path) -> None:
-    im = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
+    src = ImageOps.exif_transpose(Image.open(path))
+    # keep transparency (e.g. 3D book renders) in the WebP files
+    has_alpha = src.mode in ("RGBA", "LA") or (src.mode == "P" and "transparency" in src.info)
+    im = src.convert("RGBA" if has_alpha else "RGB")
     name = path.stem
     for w in WIDTHS:
         # every width is always written (capped at the original size) so the site can rely on all three
         target = im if im.width <= w else im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
         target.save(OUT / f"{name}-{w}.webp", "WEBP", quality=80, method=6)
     fallback = im if im.width <= 1200 else im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
+    if has_alpha:  # JPG has no alpha: flatten onto the site's ivory
+        flat = Image.new("RGB", fallback.size, (248, 245, 239))
+        flat.paste(fallback, mask=fallback.getchannel("A"))
+        fallback = flat
     fallback.save(OUT / f"{name}.jpg", "JPEG", quality=82, optimize=True, progressive=True)
     print(f"  ✓ {name}  ({im.width}×{im.height})")
 

@@ -147,3 +147,22 @@ Alamat Klinik Nissa disimpan dalam `consultation.location` (teks penuh, juga dip
 ## 8. Buku
 
 Semua dalam `book`. Jika ada edisi/buku baharu, tambah foto kulit dalam `assets/originals/`, jalankan `npm run images` dan kemas kini `book.cover`.
+
+---
+
+## 9. Rekod jemputan (dari Google Sheet "jumlah jemputan")
+
+Senarai jemputan di bahagian Pencapaian, dan angka ringkas di atasnya, dijana daripada `scripts/data/jemputan.tsv`.
+
+1. Salin baris baharu dari Google Sheet ke `scripts/data/jemputan.tsv` dengan 4 lajur dipisahkan *tab*: `tahun`, `tarikh (dd/mm/yyyy, boleh kosong)`, `tempat/program`, `tugasan` (PENCERAMAH / PANELIS / P. MAJLIS / MODERATOR / ARTIKEL / COLLAB).
+   **Jangan** salin lajur bayaran, hadiah, rating atau jualan.
+2. Jalankan `python3 scripts/build_engagements.py`, yang menghasilkan `src/content/engagements.ts`.
+3. Angka (jumlah jemputan, sesi ceramah, media, universiti & sekolah) dikira automatik.
+
+Untuk menyembunyikan sesuatu baris dari laman web, tambah namanya dalam `EXCLUDE` di `scripts/build_engagements.py`.
+
+## 10. Grafik 3D buku
+
+Tekstur kulit hadapan, tulang buku dan kulit belakang dipotong daripada fail cetakan asal (`DSBSK_WC_Print_FA_001.pdf`).
+Imej 3D statik (`assets/originals/book-3d.png`, `book-3d-back.png`) dijana oleh `scripts/render_book.py`
+(letak `front.png`, `spine.png`, `back.png` dalam satu folder, kemudian `python3 scripts/render_book.py <folder>`), dan seterusnya `npm run images`.

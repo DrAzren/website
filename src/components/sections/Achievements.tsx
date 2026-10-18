@@ -3,9 +3,10 @@
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { achievements, book, institutions, links, mediaAppearances, mediaTypeLabels, stats, type MediaAppearance, type MediaType } from "@/content/site";
-import { cx } from "@/lib/asset";
+import { asset, cx } from "@/lib/asset";
 import { useMotionPrefs } from "../providers/MotionPrefs";
 import { Counter } from "../ui/Counter";
+import { EngagementRecord } from "./EngagementRecord";
 import { CtaButton } from "../ui/CtaButton";
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Headphones, News, Play, Radio, Tv } from "../ui/Icons";
 import { Marquee } from "../ui/Marquee";
@@ -108,16 +109,26 @@ function Bestseller() {
         onPointerLeave={() => setTilt({ x: 0, y: 0 })}
       >
         <motion.div
-          animate={{ rotateY: -14 + tilt.x, rotateX: 4 + tilt.y }}
+          animate={{ rotateY: tilt.x * 0.6, rotateX: tilt.y * 0.6, x: tilt.x * 0.4 }}
           transition={{ type: "spring", stiffness: 120, damping: 14 }}
-          className="relative w-[min(17rem,60vw)] [transform-style:preserve-3d]"
+          className="relative w-[min(17rem,58vw)] [transform-style:preserve-3d]"
         >
           <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
-            <div className="overflow-hidden rounded-r-lg rounded-l-sm shadow-[30px_40px_60px_-20px_rgba(23,42,58,0.55)]">
-              <Picture photo={book.cover} sizes="18rem" />
-            </div>
+            <Picture photo={book.render} sizes="18rem" className="!h-auto" imgClassName="!h-auto object-contain" />
           </motion.div>
         </motion.div>
+        <a
+          href={asset(`/images/${book.pbaklList.src}.jpg`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group absolute bottom-3 left-3 w-20 rotate-[-7deg] rounded-xl bg-white p-1 shadow-lift transition duration-500 hover:rotate-0 hover:scale-110 sm:bottom-8 sm:left-8 sm:w-36 sm:p-1.5"
+          aria-label="Lihat senarai Top 10 Bestseller PBAKL oleh Whitecoat Books (buka di tab baharu)"
+        >
+          <span className="block aspect-[4/5] overflow-hidden rounded-lg">
+            <Picture photo={book.pbaklList} sizes="9rem" />
+          </span>
+          <span className="mt-1 block text-center text-[0.6rem] font-bold uppercase tracking-wider text-navy/70">Senarai rasmi ↗</span>
+        </a>
         <CircleBadge
           text="No.1 Top Bestseller • PBAKL 2026 • "
           className="absolute right-4 top-4 h-28 w-28 rounded-full bg-navy text-sun sm:right-8 sm:top-8 sm:h-32 sm:w-32"
@@ -355,6 +366,10 @@ function SpeakingWall() {
             </span>
           ))}
         </Marquee>
+      </div>
+
+      <div className="container-x">
+        <EngagementRecord />
       </div>
 
       <div className="container-x mt-12 flex flex-wrap gap-3">

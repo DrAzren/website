@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
 import { book, links } from "@/content/site";
 import { usePointer } from "@/lib/hooks";
 import { CtaButton } from "../ui/CtaButton";
@@ -22,7 +22,10 @@ export function BookShowcase() {
   const { x, y } = usePointer();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const scrollRot = useTransform(scrollYProgress, [0, 0.5, 1], [58, 34, 16]);
-  const rotateY = useSpring(useTransform(() => scrollRot.get() + x.get() * 18), { stiffness: 80, damping: 18 });
+  // flipping turns the book 180° to show the genuine back cover
+  const [flipped, setFlipped] = useState(false);
+  const flip = useMotionValue(0);
+  const rotateY = useSpring(useTransform(() => scrollRot.get() + x.get() * 18 + flip.get()), { stiffness: 70, damping: 16 });
   const rotateX = useTransform(y, (v) => 6 + v * -9);
   const bookY = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const scale = useTransform(scrollYProgress, [0, 0.45, 1], [0.86, 1, 0.94]);
@@ -48,14 +51,15 @@ export function BookShowcase() {
                   />
                   <div aria-hidden className="absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/25 to-transparent" />
                 </div>
-                {/* spine — as on the printed book: yellow with the title */}
-                <div className="book3d-face book3d-spine flex flex-col items-center justify-between bg-[#FFDB1A] py-4 text-navy">
-                  <span className="whitespace-nowrap font-display text-[0.62rem] font-extrabold [writing-mode:vertical-rl]">Dr, Saya Boleh Sembuh Ke?</span>
-                  <span className="grid h-6 w-6 place-items-center bg-navy">
-                    <span className="h-3.5 w-3.5 rounded-full border border-ivory/80" />
-                  </span>
+                {/* spine and back: cut from the genuine print file */}
+                <div className="book3d-face book3d-spine overflow-hidden">
+                  <Picture photo={book.spine} sizes="3rem" />
+                  <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black/20 via-white/10 to-black/10" />
                 </div>
-                <div className="book3d-face book3d-back bg-[#F5D215]" />
+                <div className="book3d-face book3d-back overflow-hidden">
+                  <Picture photo={book.back} sizes="(min-width:1024px) 20rem, 60vw" />
+                  <div aria-hidden className="absolute inset-y-0 right-0 w-3 bg-gradient-to-l from-black/25 to-transparent" />
+                </div>
                 <div className="book3d-face book3d-pages" />
                 <div className="book3d-face book3d-top" />
                 <div className="book3d-face book3d-bottom" />
@@ -82,6 +86,18 @@ export function BookShowcase() {
             className="absolute right-[3%] top-[3%] z-20 h-24 w-24 rounded-full bg-navy text-sun shadow-lift sm:h-32 sm:w-32"
             center={<span className="font-display text-3xl font-extrabold text-coral">#1</span>}
           />
+          <button
+            type="button"
+            onClick={() => {
+              const next = !flipped;
+              setFlipped(next);
+              flip.set(next ? 180 : 0);
+            }}
+            aria-pressed={flipped}
+            className="absolute bottom-0 left-1/2 z-20 -translate-x-1/2 translate-y-1/2 rounded-full bg-navy px-5 py-2.5 font-display text-sm font-bold text-ivory shadow-soft transition hover:bg-coral hover:text-navy"
+          >
+            {flipped ? "↺ Lihat kulit hadapan" : "↻ Pusing: lihat kulit belakang"}
+          </button>
         </div>
 
         {/* ------------------ copy ------------------ */}
@@ -141,7 +157,7 @@ export function BookShowcase() {
           <Reveal delay={0.2} className="mt-12 flex items-center gap-5">
             <div className="w-28 shrink-0 rotate-[-4deg] rounded-2xl bg-white p-2 pb-6 shadow-lift sm:w-32">
               <div className="aspect-[3/4] overflow-hidden rounded-xl">
-                <Picture photo={book.photo} sizes="8rem" />
+                <Picture photo={book.shelfPhoto} sizes="8rem" />
               </div>
             </div>
             <p className="font-display text-lg font-bold leading-snug text-navy">

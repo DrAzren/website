@@ -306,12 +306,6 @@ export const book = {
     width: 1600,
     height: 1985,
   } satisfies Photo,
-  renderBack: {
-    src: "book-3d-back",
-    alt: "Ilustrasi 3D kulit belakang buku Dr, Saya Boleh Sembuh Ke?",
-    width: 1600,
-    height: 1980,
-  } satisfies Photo,
   shelfPhoto: {
     src: "book-shelf",
     alt: "Naskhah buku Dr, Saya Boleh Sembuh Ke? tersusun di rak paparan",
